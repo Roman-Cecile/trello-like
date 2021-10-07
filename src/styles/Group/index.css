@@ -1,0 +1,25 @@
+.group {
+  width: 250px;
+  height: 95%;
+  border: solid 1px white;
+  margin: auto 8px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #4e5c78;
+  box-shadow: 5px 5px 23px 5px rgb(0 0 0 / 24%);
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+.group-title {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: large;
+  max-width: 150px;
+}

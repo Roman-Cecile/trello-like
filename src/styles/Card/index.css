@@ -1,0 +1,12 @@
+.card {
+  margin: 4px;
+  min-height: 80px;
+  border: solid 1px white;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+}
