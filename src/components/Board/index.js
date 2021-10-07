@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import PropTypes from "prop-types";
 
 // DnD
@@ -16,14 +16,23 @@ import { GroupContext } from "../context/group-context";
 const Board = () => {
   const [groups, setGroups] = useState([
     {
-      id: Date.now(),
+      id: 1,
       title: "Titre",
     },
   ]);
+  const handleClick = () => {
+    setGroups((prevState) => [
+      {
+        id: Date.now(),
+        title: "Titre",
+      },
+      ...prevState,
+    ]);
+  };
   const simpleList = document.getElementById("simpleList");
   if (simpleList) {
     Sortable.create(simpleList, {
-      filter: ".add-button",
+      filter: ".add-button, .card, .group-header",
       animation: 150,
       draggable: ".group",
     });
@@ -38,15 +47,18 @@ const Board = () => {
     }
   });
 
-  const handleClick = () => {
-    setGroups((prevState) => [
-      {
-        id: Date.now(),
-        title: "Titre",
-      },
-      ...prevState,
-    ]);
-  };
+  useEffect(() => {
+    groups.map((group) => {
+      const groupId = document.getElementById(`group-${group.id}`);
+      if (groupId !== null) {
+        Sortable.create(groupId, {
+          group: "shared", // set both lists to same group
+          animation: 150,
+          filter: ".add-button, .nodrag-group-header",
+        });
+      }
+    });
+  }, [groups]);
 
   return (
     <div className="board">
