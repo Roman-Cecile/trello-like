@@ -7,3 +7,14 @@
   display: flex;
   border-radius: 4px;
 }
+
+.drag-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.drag-list::-webkit-scrollbar {
+  display: none;
+}

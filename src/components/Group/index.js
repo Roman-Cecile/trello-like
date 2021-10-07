@@ -25,14 +25,15 @@ const Group = ({ group, setGroups }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [editedGroup, setEditedGroup] = useState(group);
 
-  const cardModel = {
-    id: Date.now(),
-    title: "Titre",
-    text: "Description",
-  };
-
   const createCard = () => {
-    setCards((prevState) => [...prevState, cardModel]);
+    setCards((prevState) => [
+      {
+        id: Date.now(),
+        title: "Titre",
+        text: "Description",
+      },
+      ...prevState,
+    ]);
   };
 
   const handleEditGroup = (event) => {
@@ -50,35 +51,40 @@ const Group = ({ group, setGroups }) => {
 
   return (
     <div id={`group-${group.id}`} className="group">
-      <div className="group-header">
-        <input
-          id={`input-group-${group.id}`}
-          disabled={isDisabled}
-          value={isDisabled ? group.title : editedGroup.title}
-          className="input-title"
-          onChange={handleEditGroup}
-        />
+      <div className="nodrag-group-header">
+        <div className="group-header">
+          <input
+            id={`input-group-${group.id}`}
+            disabled={isDisabled}
+            value={isDisabled ? group.title : editedGroup.title}
+            className="input-title"
+            onChange={handleEditGroup}
+          />
 
-        {isDisabled ? (
+          {isDisabled ? (
+            <button
+              onClick={() => toggleEditTarget(setIsDisabled, isDisabled)}
+              className="edit-button">
+              Edit
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                updateTarget(groups, group, editedGroup, setGroups);
+                toggleEditTarget(setIsDisabled, isDisabled);
+              }}
+              className="edit-button">
+              Valider
+            </button>
+          )}
           <button
-            onClick={() => toggleEditTarget(setIsDisabled, isDisabled)}
-            className="edit-button">
-            Edit
+            onClick={() => removeCurrentTarget(setGroups, groups, group)}
+            className="delete-button">
+            X
           </button>
-        ) : (
-          <button
-            onClick={() => {
-              updateTarget(groups, group, editedGroup, setGroups);
-              toggleEditTarget(setIsDisabled, isDisabled);
-            }}
-            className="edit-button">
-            Valider
-          </button>
-        )}
-        <button
-          onClick={() => removeCurrentTarget(setGroups, groups, group)}
-          className="delete-button">
-          X
+        </div>
+        <button className="add-button" onClick={createCard}>
+          + Ajouter
         </button>
       </div>
       <CardContext.Provider value={cards}>
@@ -86,9 +92,6 @@ const Group = ({ group, setGroups }) => {
           <Card key={card.id} card={card} setCards={setCards} />
         ))}
       </CardContext.Provider>
-      <button className="add-button" onClick={createCard}>
-        + Ajouter
-      </button>
     </div>
   );
 };

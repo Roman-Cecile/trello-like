@@ -34,7 +34,7 @@ const Card = ({ setCards, card }) => {
   }, [isDisabled]);
 
   return (
-    <div className="card" id={card.id}>
+    <div className="card" id={`card-${card.id}`}>
       <div className="card-header">
         <input
           id={`input-card-${card.id}`}
