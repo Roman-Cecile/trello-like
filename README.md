@@ -1,5 +1,4 @@
 # Todo
-- Add drag and drop
 - color picker
 - label
 
@@ -10,5 +9,6 @@
 - Delete card ✔️
 - Edit group ✔️
 - Edit card ✔️
+- Drag and drop ✔️
 
 
