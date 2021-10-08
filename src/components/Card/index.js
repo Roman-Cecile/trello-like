@@ -15,7 +15,7 @@ import {
   updateTarget,
 } from "../../utils/genericFunctions";
 
-const Card = ({ setCards, card }) => {
+const Card = ({ setCards, card, groupId }) => {
   const cards = React.useContext(CardContext);
   const [isDisabled, setIsDisabled] = useState(true);
   const [editedCard, setEditedCard] = useState(card);
@@ -34,7 +34,7 @@ const Card = ({ setCards, card }) => {
   }, [isDisabled]);
 
   return (
-    <div className="card" id={`card-${card.id}`}>
+    <div className="card" id={`card-${card.id}`} groupid={groupId}>
       <div className="card-header">
         <input
           id={`input-card-${card.id}`}
@@ -60,7 +60,7 @@ const Card = ({ setCards, card }) => {
           </button>
         )}
         <button
-          onClick={() => removeCurrentTarget(setCards, cards, card)}
+          onClick={() => removeCurrentTarget(setCards, cards, card, groupId)}
           className="delete-button">
           X
         </button>

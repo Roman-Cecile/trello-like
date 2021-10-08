@@ -12,6 +12,9 @@ import Card from "../Card";
 import { GroupContext } from "../context/group-context";
 import { CardContext } from "../context/card-context";
 
+// DnD
+import Sortable from "sortablejs";
+
 // GenericFunctions
 import {
   removeCurrentTarget,
@@ -31,6 +34,7 @@ const Group = ({ group, setGroups }) => {
         id: Date.now(),
         title: "Titre",
         text: "Description",
+        groupe_id: group.id,
       },
       ...prevState,
     ]);
@@ -89,7 +93,12 @@ const Group = ({ group, setGroups }) => {
       </div>
       <CardContext.Provider value={cards}>
         {cards.map((card) => (
-          <Card key={card.id} card={card} setCards={setCards} />
+          <Card
+            key={card.id}
+            card={card}
+            setCards={setCards}
+            groupId={group.id}
+          />
         ))}
       </CardContext.Provider>
     </div>
