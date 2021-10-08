@@ -25,6 +25,7 @@ const Board = () => {
       {
         id: Date.now(),
         title: "Titre",
+        cards: [],
       },
       ...prevState,
     ]);
@@ -55,6 +56,16 @@ const Board = () => {
           group: "shared", // set both lists to same group
           animation: 150,
           filter: ".add-button, .nodrag-group-header",
+          draggable: ".card",
+          onAdd: function (/**Event*/ evt) {
+            var itemEl = evt.item; // dragged HTMLElement
+            let origParent = evt.from;
+            origParent.appendChild(itemEl);
+            // update store
+          },
+          // onMove: function (evt) {
+          //   return evt.related.className.indexOf("nodrag-group-header") === -1;
+          // },
         });
       }
     });

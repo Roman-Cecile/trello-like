@@ -1,5 +1,5 @@
 // Remove card/group
-export const removeCurrentTarget = (setState, arrayTargets, target) =>
+export const removeCurrentTarget = (setState, arrayTargets, target, groupId) =>
   setState(arrayTargets.filter((arrayTarget) => arrayTarget.id !== target.id));
 
 // disabled/enabled edition
